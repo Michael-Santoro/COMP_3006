@@ -12,7 +12,7 @@ def add_frequencies(d, file, remove_case): #remove_case
     #if remove_case:
 
     #Defines the Symbols that we would like to ignore
-    delimiters = ['!', '\n']
+    delimiters = ['!', '\n', ' ']
     #Read File
     f = open(str(file), mode='r', encoding='ASCII')
     file_text = f.read()
@@ -36,24 +36,34 @@ def add_frequencies(d, file, remove_case): #remove_case
 def main():
     d = {}
     files = []
-
+    case_flag = True
     for flag in sys.argv:
         if '.txt' == flag[-4:]:
             files.append(flag)
-    for file in files:
-        add_frequencies(d, file, True)
 
 
-    #if '-c' in sys.argv:
+    if '-c' in sys.argv:
+        case_flag = False
 
-    #elif '-l' in sys.argv:
 
     #elif '-z':
 
     #else:
-    for i in d:
-        print('"',i,'",', d[i],'\n')
-        #case = True
+
+
+    for file in files:
+        add_frequencies(d, file, case_flag)
+
+    #Prints Just the Letters with that Flag
+    if '-l' in sys.argv:
+        index = sys.argv.index('-l')
+        string_flag = sys.argv[index+1]
+        for l in string_flag:
+            print(f'"{l}",{d[l]}\n')
+    else:
+        for i in d:
+            print(f'"{i}",{d[i]}\n')
+
 
 
 

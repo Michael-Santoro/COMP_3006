@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="98560a24-a503-4b94-bbc2-7a56dc9f9f5b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/test2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/count.py" beforeDir="false" afterPath="$PROJECT_DIR$/count.py" afterDir="false" />
     </list>
@@ -31,6 +32,17 @@
     <property name="last_opened_file_path" value="$USER_HOME$" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="WindowStateProjectService">
     <state x="365" y="172" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1611624647872">
       <screen x="0" y="0" width="1368" height="872" />
