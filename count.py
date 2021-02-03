@@ -38,6 +38,7 @@ def add_frequencies(d, file, remove_case):
             d[letter] = 1
 
 def print_count(d, files, case_flag):
+    print_statement = ''
     #Collects the file names to count
     for flag in sys.argv:
         if '.txt' == flag[-4:]:
@@ -56,19 +57,23 @@ def print_count(d, files, case_flag):
         index = sys.argv.index('-l')
         string_flag = sys.argv[index+1]
         for l in string_flag:
-            print(f'"{l}",{d[l]}')#removed '/n' here if writing to an actual csv would need to add
-
+            print(f'"{l}",{d[l]}')#removed '\n' here if writing to an actual csv would need to add
+            print_statement += f'"{l}",{d[l]},\n'
+        return print_statement
     #Prints the syntax for the '-z' flag
     elif '-z' in sys.argv:
         zFlagList = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
         for z in zFlagList:
             if z in d:
-                print(f'"{z}",{d[z]}') #removed '/n' here if writing to an actual csv would need to add
+                print(f'"{z}",{d[z]}') #removed '\n' here if writing to an actual csv would need to add
+                print_statement += f'"{z}",{d[z]},\n'
             else:
-                print(f'"{z}",0')#removed '/n' here if writing to an actual csv would need to add
-
+                print(f'"{z}",0')#removed '\n' here if writing to an actual csv would need to add
+                print_statement += f'"{z}",0,\n'
+        return print_statement
     else:
         for i in d:
-            print(f'"{i}",{d[i]}')#removed '/n' here if writing to an actual csv would need to add
+            print(f'"{i}",{d[i]}')#removed '\n' here if writing to an actual csv would need to add
+            print_statement += f'"{i}",{d[i]},\n'
 
-
+        return print_statement
