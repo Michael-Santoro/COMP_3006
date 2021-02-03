@@ -37,11 +37,7 @@ def add_frequencies(d, file, remove_case):
         else:
             d[letter] = 1
 
-def main():
-    d = {}
-    files = []
-    case_flag = True
-
+def print_count(d, files, case_flag):
     #Collects the file names to count
     for flag in sys.argv:
         if '.txt' == flag[-4:]:
@@ -76,4 +72,3 @@ def main():
             print(f'"{i}",{d[i]}')#removed '/n' here if writing to an actual csv would need to add
 
 
-main()
