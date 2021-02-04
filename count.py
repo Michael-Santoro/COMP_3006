@@ -16,8 +16,12 @@ def add_frequencies(d, file, remove_case):
     delimiters = ['!', '\n', ' ']
 
     #Reads in file
-    f = open(str(file), mode='r', encoding='ASCII')
-    file_text = f.read()
+    if isinstance(file,str):
+        f = open(file, mode='r', encoding='ASCII')
+        file_text = f.read()
+    else:
+        f = open(str(file), mode='r', encoding='ASCII')
+        file_text = f.read()
 
     #Check for the remove case flag and fix cases
     if remove_case:
@@ -37,7 +41,10 @@ def add_frequencies(d, file, remove_case):
         else:
             d[letter] = 1
 
-def print_count(d, files, case_flag):
+def print_count():
+    d={}
+    case_flag = True
+    files = []
     print_statement = ''
     #Collects the file names to count
     for flag in sys.argv:
@@ -56,8 +63,9 @@ def print_count(d, files, case_flag):
     if '-l' in sys.argv:
         index = sys.argv.index('-l')
         string_flag = sys.argv[index+1]
+        print(string_flag)
         for l in string_flag:
-            print(f'"{l}",{d[l]}')#removed '\n' here if writing to an actual csv would need to add
+            print(f'"{l}",{d[l]}') #removed '\n' here if writing to an actual csv would need to add
             print_statement += f'"{l}",{d[l]},\n'
         return print_statement
     #Prints the syntax for the '-z' flag
