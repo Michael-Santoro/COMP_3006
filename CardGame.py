@@ -62,7 +62,7 @@ class deck:
                 self.deck.remove(c)
     def createDeck(self):
         values = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
-        suits = ['H', 'C', 'S', 'D']
+        suits = ['Hearts', 'Clubs', 'Spades', 'Diamonds']
         for value in values:
             for suit in suits:
                 c = card(value,suit)
@@ -71,8 +71,10 @@ class deck:
         randomInt = random.randint(0,len(self.deck))
         #Might need a Deep Copy Here
         returnCard = self.deck[randomInt]
+        #Deep Copy
+        newCard = card(returnCard.value, returnCard.suit)
         self.removeCardfromDeck(returnCard)
-        return returnCard
+        return newCard
     def deckCount(self):
         return len(self.deck)
 
@@ -91,10 +93,16 @@ def main():
     user = player()
     comp = player()
     #Deal Cards
-    #while(gameDeck.deckCount() >= 0):
-    user.addCardtoHand(gameDeck.drawCardFromDeck())
-    print(gameDeck.deckCount())
+    flag = True
+    while(gameDeck.deckCount() > 1):
+        if flag:
+            user.addCardtoHand(gameDeck.drawCardFromDeck())
+            flag = False
+        else:
+            comp.addCardtoHand(gameDeck.drawCardFromDeck())
+            flag = True
     user.printHand()
+    comp.printHand()
 
 
 
