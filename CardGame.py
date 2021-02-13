@@ -15,6 +15,9 @@
 #their own hand to the player on their left. Play proceeds in this way until all cards have been paired except one
 #- the odd queen, which cannot be paired - and the player who has that card is the Old Maid!
 
+#Import
+import random
+
 #Define a Class
 class card:
     def __init__(self,value,suit):
@@ -39,41 +42,60 @@ class player:
                 self.discardpair(self,firstCard,c)
                 self.removeCardfromHand(self, firstCard)
                 self.removeCardfromHand(self, c)
-                
+    def handCount(self):
+        return len(self.hand)
+    def printHand(self):
+        for i in self.hand:
+            print(i.value,i.suit)
 
 class deck:
     #Deck Object with all 52 cards
     #Full list of 52 cards
-    values = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
-    suits = ['H', 'C', 'S', 'D']
+
     def __init__(self):
         self.deck = []
     def addCardtoDeck(self,card):
         self.deck.append(card)
     def removeCardfromDeck(self,card):
         for c in self.deck:
-            if c.suit == card.suit
-        self.deck.remove(card)
+            if c.suit == card.suit and c.value == card.value:
+                self.deck.remove(c)
     def createDeck(self):
+        values = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
+        suits = ['H', 'C', 'S', 'D']
         for value in values:
             for suit in suits:
                 c = card(value,suit)
                 self.deck.append(c)
+    def drawCardFromDeck(self):
+        randomInt = random.randint(0,len(self.deck))
+        #Might need a Deep Copy Here
+        returnCard = self.deck[randomInt]
+        self.removeCardfromDeck(returnCard)
+        return returnCard
+    def deckCount(self):
+        return len(self.deck)
 
 
 
 
 def main():
-    for value in values:
-        for suit in suits:
-            c = card(value,suit)
-            deck.append(c)
-            print(c.value,c.suit)
-    print(deck)
     oldMaid = card('Q','S')
-    print(oldMaid.value,oldMaid.suit)
+    #Create Deck
+    gameDeck = deck()
+    gameDeck.createDeck()
+    #Remove Old Maid from Deck
+    gameDeck.removeCardfromDeck(oldMaid)
+    print(gameDeck.deckCount())
+    #Create Players
+    user = player()
+    comp = player()
+    #Deal Cards
+    #while(gameDeck.deckCount() >= 0):
+    user.addCardtoHand(gameDeck.drawCardFromDeck())
+    print(gameDeck.deckCount())
+    user.printHand()
 
-    print(len(deck))
 
 
 main()
