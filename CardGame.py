@@ -70,11 +70,10 @@ class deck:
     def drawCardFromDeck(self):
         randomInt = random.randint(0,len(self.deck))
         #Might need a Deep Copy Here
-        returnCard = self.deck[randomInt]
         #Deep Copy
-        newCard = card(returnCard.value, returnCard.suit)
-        self.removeCardfromDeck(returnCard)
-        return newCard
+        returnCard = card(self.deck[randomInt].value, self.deck[randomInt].suit)
+        self.removeCardfromDeck(self.deck[randomInt])
+        return returnCard
     def deckCount(self):
         return len(self.deck)
 
@@ -96,10 +95,14 @@ def main():
     flag = True
     while(gameDeck.deckCount() > 1):
         if flag:
+            print(gameDeck.deckCount())
             user.addCardtoHand(gameDeck.drawCardFromDeck())
+            user.printHand()
             flag = False
         else:
+            print(gameDeck.deckCount())
             comp.addCardtoHand(gameDeck.drawCardFromDeck())
+            comp.printHand()
             flag = True
     user.printHand()
     comp.printHand()
