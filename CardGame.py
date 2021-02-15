@@ -37,7 +37,7 @@ class player:
         else:
             for a in self.hand:
                 if card.value == a.value:
-                    self.discardpair(self, a, card)
+                    self.discardpair(a, card)
 
     def removeCardfromHand(self, card):
         self.hand.remove(card)
@@ -46,8 +46,8 @@ class player:
     def checkForPair(self, checkCard):
         for b in self.hand:
             if checkCard.value == b.value:
-                self.discardpair(self,checkCard,b)
-                self.removeCardfromHand(self, b)
+                self.discardpair(checkCard,b)
+                self.removeCardfromHand(b)
     def handCount(self):
         return len(self.hand)
     def printHand(self):
@@ -69,8 +69,11 @@ class deck:
     def createDeck(self):
         values = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
         suits = ['Hearts', 'Clubs', 'Spades', 'Diamonds']
+        #alias
         for value in values:
+            #alias
             for suit in suits:
+                #alias
                 e = card(value,suit)
                 self.deck.append(e)
     def drawCardFromDeck(self):
@@ -109,7 +112,7 @@ def main():
             comp.addCardtoHand(gameDeck.drawCardFromDeck())
             flag = True
     user.printHand()
-    print(len(user.hand),user.handValues)
+    print(len(user.hand),user.handValues, len(user.pile))
     comp.printHand()
     print(len(comp.hand),comp.handValues)
 
