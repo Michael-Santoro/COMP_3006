@@ -68,7 +68,7 @@ class deck:
                 c = card(value,suit)
                 self.deck.append(c)
     def drawCardFromDeck(self):
-        randomInt = random.randint(0,len(self.deck))
+        randomInt = random.randint(0,len(self.deck)-1)
         #Might need a Deep Copy Here
         #Deep Copy
         returnCard = card(self.deck[randomInt].value, self.deck[randomInt].suit)
@@ -97,15 +97,17 @@ def main():
         if flag:
             print(gameDeck.deckCount())
             user.addCardtoHand(gameDeck.drawCardFromDeck())
-            user.printHand()
+            user.checkForPair()
             flag = False
         else:
             print(gameDeck.deckCount())
             comp.addCardtoHand(gameDeck.drawCardFromDeck())
-            comp.printHand()
+            user.checkForPair()
             flag = True
     user.printHand()
+    print(len(user.hand))
     comp.printHand()
+    print(len(comp.hand))
 
 
 
