@@ -29,24 +29,30 @@ class player:
     def __init__(self):
         self.hand = []
         self.pile = []
+        self.handValues = []
     def addCardtoHand(self, card):
-        self.hand.append(card)
+        if card.value not in self.handValues:
+            self.handValues.append(card.value)
+            self.hand.append(card)
+        else:
+            for a in self.hand:
+                if card.value == a.value:
+                    self.discardpair(self, a, card)
+
     def removeCardfromHand(self, card):
         self.hand.remove(card)
-    def discardpair(self,card1, card2):
+    def discardpair(self, card1, card2):
         self.pile.append((card1,card2))
-    def checkForPair(self):
-        firstCard = self.hand[0]
-        for c in self.hand[1:]:
-            if firstCard.value == c.value:
-                self.discardpair(self,firstCard,c)
-                self.removeCardfromHand(self, firstCard)
-                self.removeCardfromHand(self, c)
+    def checkForPair(self, checkCard):
+        for b in self.hand:
+            if checkCard.value == b.value:
+                self.discardpair(self,checkCard,b)
+                self.removeCardfromHand(self, b)
     def handCount(self):
         return len(self.hand)
     def printHand(self):
-        for i in self.hand:
-            print(i.value,i.suit)
+        for c in self.hand:
+            print(c.value,c.suit)
 
 class deck:
     #Deck Object with all 52 cards
@@ -57,16 +63,16 @@ class deck:
     def addCardtoDeck(self,card):
         self.deck.append(card)
     def removeCardfromDeck(self,card):
-        for c in self.deck:
-            if c.suit == card.suit and c.value == card.value:
-                self.deck.remove(c)
+        for d in self.deck:
+            if d.suit == card.suit and d.value == card.value:
+                self.deck.remove(d)
     def createDeck(self):
         values = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
         suits = ['Hearts', 'Clubs', 'Spades', 'Diamonds']
         for value in values:
             for suit in suits:
-                c = card(value,suit)
-                self.deck.append(c)
+                e = card(value,suit)
+                self.deck.append(e)
     def drawCardFromDeck(self):
         randomInt = random.randint(0,len(self.deck)-1)
         #Might need a Deep Copy Here
@@ -97,17 +103,15 @@ def main():
         if flag:
             print(gameDeck.deckCount())
             user.addCardtoHand(gameDeck.drawCardFromDeck())
-            user.checkForPair()
             flag = False
         else:
             print(gameDeck.deckCount())
             comp.addCardtoHand(gameDeck.drawCardFromDeck())
-            user.checkForPair()
             flag = True
     user.printHand()
-    print(len(user.hand))
+    print(len(user.hand),user.handValues)
     comp.printHand()
-    print(len(comp.hand))
+    print(len(comp.hand),comp.handValues)
 
 
 
