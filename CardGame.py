@@ -112,31 +112,34 @@ def main():
             comp.addCardtoHand(gameDeck.drawCardFromDeck())
             flag = True
 
-    while len(user.hand) >= 0 or len(comp.hand) >= 0:
+    while len(user.hand) > 0 or len(comp.hand) > 0:
         userInput = input("What would you like to do? \n1:view hand \n2:view discard \n3:see how many cards comp has "
                           "\n4:See Score \n5:(add a space) then write # of card\n")
         if userInput == '1':
             user.printHand()
+            print('\n')
         elif userInput == '2':
             user.printPile()
+            print('\n')
         elif userInput == '3':
-            print(len(comp.hand))
+            print("Comp Has ",len(comp.hand)," Cards in Hand\n")
         elif userInput == '4':
-            print("Your Score: ", len(user.pile), "Comp Score: ", len(comp.pile))
+            print("Your Score: ", len(user.pile), "Comp Score: ", len(comp.pile),'\n')
         else:
             idx = userInput.find(' ')
-            value = int(userInput[idx:])
+            value = int(userInput[idx:])-1
             drawnCard = card(comp.hand[value].value,comp.hand[value].suit)
-            print("Drawn Card: ",drawnCard.value, drawnCard.suit)
+            print("\nDrawn Card: ",drawnCard.value, drawnCard.suit)
             comp.removeCardfromHand(comp.hand[value])
             user.addCardtoHand(drawnCard)
-            print("Computer Turn")
+            print("\nComputer Turn")
             randomInt = random.randint(0,len(user.hand)-1)
             drawnCard = card(user.hand[randomInt].value,user.hand[randomInt].suit)
-            print("Drawn Card: ",drawnCard.value, drawnCard.suit)
+            print("\nDrawn Card: ",drawnCard.value, drawnCard.suit,'\n')
             user.removeCardfromHand(user.hand[randomInt])
             comp.addCardtoHand(drawnCard)
-    if len(user.pile) > len(comp.pile):
+            print("Comp has",len(comp.hand),"cards in hand\n")
+    if len(user.pile) == 0:
         print("Game Over: You Win! Final Score:\nYour Score: ", len(user.pile),"\nComp Score: ", len(comp.pile))
     else:
         print("Game Over: You Lose! Final Score:\nYour Score: ", len(user.pile),"\nComp Score: ", len(comp.pile))
