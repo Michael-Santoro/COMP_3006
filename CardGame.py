@@ -81,7 +81,6 @@ class deck:
                 self.deck.append(e)
     def drawCardFromDeck(self):
         randomInt = random.randint(0,len(self.deck)-1)
-        #Might need a Deep Copy Here
         #Deep Copy
         returnCard = card(self.deck[randomInt].value, self.deck[randomInt].suit)
         self.removeCardfromDeck(self.deck[randomInt])
@@ -116,24 +115,31 @@ def main():
         userInput = input("What would you like to do? \n1:view hand \n2:view discard \n3:see how many cards comp has "
                           "\n4:See Score \n5:(add a space) then write # of card\n")
         if userInput == '1':
+        #view hand was selected
             user.printHand()
             print('\n')
         elif userInput == '2':
+        #view users discard pile
             user.printPile()
             print('\n')
         elif userInput == '3':
+        #view computers hand count
             print("Comp Has ",len(comp.hand)," Cards in Hand\n")
         elif userInput == '4':
+        #view hand
             print("Your Score: ", len(user.pile), "Comp Score: ", len(comp.pile),'\n')
         else:
+        #play assumed user entered '5 comp_hand_value'
             idx = userInput.find(' ')
             value = int(userInput[idx:])-1
+            #Deep Copy
             drawnCard = card(comp.hand[value].value,comp.hand[value].suit)
             print("\nDrawn Card: ",drawnCard.value, drawnCard.suit)
             comp.removeCardfromHand(comp.hand[value])
             user.addCardtoHand(drawnCard)
             print("\nComputer Turn")
             randomInt = random.randint(0,len(user.hand)-1)
+            #Deep Copy
             drawnCard = card(user.hand[randomInt].value,user.hand[randomInt].suit)
             print("\nDrawn Card: ",drawnCard.value, drawnCard.suit,'\n')
             user.removeCardfromHand(user.hand[randomInt])
@@ -143,7 +149,5 @@ def main():
         print("Game Over: You Win! Final Score:\nYour Score: ", len(user.pile),"\nComp Score: ", len(comp.pile))
     else:
         print("Game Over: You Lose! Final Score:\nYour Score: ", len(user.pile),"\nComp Score: ", len(comp.pile))
-
-
 
 main()
