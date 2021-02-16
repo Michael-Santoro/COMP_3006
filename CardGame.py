@@ -53,6 +53,9 @@ class player:
     def printHand(self):
         for c in self.hand:
             print(c.value,c.suit)
+    def printPile(self):
+        for c in self.pile:
+            print(c[0].value,c[0].suit,',',c[1].value,c[1].suit)
 
 class deck:
     #Deck Object with all 52 cards
@@ -96,7 +99,6 @@ def main():
     gameDeck.createDeck()
     #Remove Old Maid from Deck
     gameDeck.removeCardfromDeck(oldMaid)
-    print(gameDeck.deckCount())
     #Create Players
     user = player()
     comp = player()
@@ -104,17 +106,40 @@ def main():
     flag = True
     while(gameDeck.deckCount() > 1):
         if flag:
-            print(gameDeck.deckCount())
             user.addCardtoHand(gameDeck.drawCardFromDeck())
             flag = False
         else:
-            print(gameDeck.deckCount())
             comp.addCardtoHand(gameDeck.drawCardFromDeck())
             flag = True
-    user.printHand()
-    print(len(user.hand),user.handValues, len(user.pile))
-    comp.printHand()
-    print(len(comp.hand),comp.handValues)
+
+    while len(user.hand) >= 0 or len(comp.hand) >= 0:
+        userInput = input("What would you like to do? \n1:view hand \n2:view discard \n3:see how many cards comp has "
+                          "\n4:See Score \n5:(add a space) then write # of card\n")
+        if userInput == '1':
+            user.printHand()
+        elif userInput == '2':
+            user.printPile()
+        elif userInput == '3':
+            print(len(comp.hand))
+        elif userInput == '4':
+            print("Your Score: ", len(user.pile), "Comp Score: ", len(comp.pile))
+        else:
+            idx = userInput.find(' ')
+            value = int(userInput[idx:])
+            drawnCard = card(comp.hand[value].value,comp.hand[value].suit)
+            print("Drawn Card: ",drawnCard.value, drawnCard.suit)
+            comp.removeCardfromHand(comp.hand[value])
+            user.addCardtoHand(drawnCard)
+            print("Computer Turn")
+            randomInt = random.randint(0,len(user.hand)-1)
+            drawnCard = card(user.hand[randomInt].value,user.hand[randomInt].suit)
+            print("Drawn Card: ",drawnCard.value, drawnCard.suit)
+            user.removeCardfromHand(user.hand[randomInt])
+            comp.addCardtoHand(drawnCard)
+    if len(user.pile) > len(comp.pile):
+        print("Game Over: You Win! Final Score:\nYour Score: ", len(user.pile),"\nComp Score: ", len(comp.pile))
+    else:
+        print("Game Over: You Lose! Final Score:\nYour Score: ", len(user.pile),"\nComp Score: ", len(comp.pile))
 
 
 
