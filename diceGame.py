@@ -9,10 +9,10 @@ import random
 class dice:
     def __init__(self,sides):
         self.sides = sides
-        self.value = self.roll()
+        self.value = 1
 
     def __str__(self):
-        s = f'Your Roll was: {self.value}'
+        s = f'Die Value: {self.value}'
         return s
 
     #Equals
@@ -63,7 +63,6 @@ class dice:
 
     def roll(self):
         self.value = random.randint(1,self.sides)
-        print(f'{self} roll was {self.value}')
         return self.value
 
 #A "Cup of Dice" class
@@ -131,21 +130,21 @@ class player:
         self.money = 1500
         self.cup = cupOfDice(qtyOfDice,sidesOnDie)
     def __str__(self):
-        return self.money
+        return str(self.money)
 
 def main():
-    qtyDice = input(f'Welcome To Dice War Game/nEnter the number of '
-                    f'dice you would like to play with')
-    numSides = input(f'Enter the number of sides you would like the die to have?')
-    user = player(qtyDice,numSides)
-    computer = player(qtyDice,numSides)
+    qtyDice = input(f'Welcome To Dice War Game\nEnter the number of '
+                    f'dice you would like to play with\n')
+    numSides = input(f'Enter the number of sides you would like the die to have?\n')
+    user = player(int(qtyDice),int(numSides))
+    computer = player(int(qtyDice),int(numSides))
     while user.money >0:
-        wager = input(f'You have: ${user} to wager. How much would you like to wager?')
+        wager = input(f'You have: ${user} to wager. How much would you like to wager?\n')
         if user.cup.cupRoll() > computer.cup.cupRoll():
-            user.money += wager
+            user.money += int(wager)
         else:
-            user.money -= wager
-        print(f'Your sum was: {user.cup.sum} and the computers sum was: {computer.cup.sum}')
+            user.money -= int(wager)
+        print(f'Your sum was: {user.cup.sum}; and the Computers sum was: {computer.cup.sum}')
 
 
 
