@@ -12,7 +12,7 @@ class dice:
         self.value = 1
 
     def __str__(self):
-        s = f'Die Value: {self.value}'
+        s = self
         return s
 
     #Equals
@@ -33,19 +33,22 @@ class dice:
             return True
         else:
             NotImplemented
+
     #Greater Than
     def __gt__(self, other):
-        if self.value > other.value:
-            return True
-        else:
-            NotImplemented
+        if type(self) == type(other):
+            if self.value > other.value:
+                return True
+            else:
+                NotImplemented
 
     #Less Than Equal
     def __le__(self, other):
-        if self.value <= other.value:
-            return True
-        else:
-            NotImplemented
+        if type(self) == type(other):
+            if self.value <= other.value:
+                return True
+            else:
+                NotImplemented
 
     #Greater Than Equal
     def __ge__(self, other):
@@ -63,6 +66,7 @@ class dice:
 
     def roll(self):
         self.value = random.randint(1,self.sides)
+        print(f'    Die Value: {self.value}')
         return self.value
 
 #A "Cup of Dice" class
@@ -75,7 +79,7 @@ class cupOfDice:
             self.cup.append(dice(sides))
 
     def __str__(self):
-        s = f'{self} sum was: {self.value}'
+        s = f'{self.sum}'
         return s
 
     #Equals
@@ -140,7 +144,11 @@ def main():
     computer = player(int(qtyDice),int(numSides))
     while user.money >0:
         wager = input(f'You have: ${user} to wager. How much would you like to wager?\n')
-        if user.cup.cupRoll() > computer.cup.cupRoll():
+        print('Your Rolls:')
+        user.cup.cupRoll()
+        print('Computer Rolls:')
+        computer.cup.cupRoll()
+        if user.cup.sum > computer.cup.sum:
             user.money += int(wager)
         else:
             user.money -= int(wager)
