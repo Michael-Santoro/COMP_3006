@@ -143,7 +143,10 @@ def main():
     user = player(int(qtyDice),int(numSides))
     computer = player(int(qtyDice),int(numSides))
     while user.money >0:
-        wager = input(f'You have: ${user} to wager. How much would you like to wager?\n')
+        wager = input(f'You have: ${user} to wager. How much would you like to wager?\n'
+                      f'If you would like to cash out enter q\n')
+        if wager == 'q':
+            break
         print('Your Rolls:')
         user.cup.cupRoll()
         print('Computer Rolls:')
@@ -153,7 +156,10 @@ def main():
         else:
             user.money -= int(wager)
         print(f'Your sum was: {user.cup.sum}; and the Computers sum was: {computer.cup.sum}')
-
+    if user.money > 0:
+        print(f'You cashed out with ${user}')
+    else:
+        print(f'You Lose!')
 
 
 
