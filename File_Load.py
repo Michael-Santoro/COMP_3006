@@ -1,6 +1,5 @@
 #Michael Santoro
 #COMP 3008 - Project 6
-#Using pandas, load the file you created above into your project as a dataframe.
 #Calculate the mean, standard deviation, mode, and median of the values in your file.
 #Generate a text file that includes:
 #The above statistics
@@ -12,7 +11,10 @@ import pandas as pd
 
 
 def main():
-    df = pd.read
+    #Read in File to DataFrame
+    fileName = 'numPyArray.csv'
+    df = pd.read_csv(fileName)
+    print(df.head())
 
 
 main()

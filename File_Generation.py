@@ -9,11 +9,11 @@ import random
 
 def main():
     list = []
-    csvName = 'numPyArray'
+    csvName = 'numPyArray.csv'
     ColumnHeaders = ''
     string = ''
     #Create String of Column Headers
-    for j in range(10):
+    for j in range(1,11):
         ColumnHeaders += f'Column {j},'
     ColumnHeaders += '\n'
     # Find Random numbers and Append to List
@@ -22,7 +22,10 @@ def main():
         list.append(number)
     a = np.array(list).reshape(10,1000)
     print(a.shape)
-    string = ColumnHeaders + np.array2string(a,separator=',')
+    string = np.array2string(a, separator=',', max_line_width = 45, threshold = 10000)
+    string.replace('[', '')
+    string.replace(']','')
+    string = ColumnHeaders + string
 
     #Write the string from print to .csv
     f = open(str(csvName), mode='w', encoding='ASCII')
