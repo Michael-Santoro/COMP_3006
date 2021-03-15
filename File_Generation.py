@@ -15,19 +15,22 @@ def main():
     #Create String of Column Headers
     for j in range(1,11):
         ColumnHeaders += f'Column {j},'
+    ColumnHeaders = ColumnHeaders[:-1]
     ColumnHeaders += '\n'
     # Find Random numbers and Append to List
+    #matrix = np.random.randint(1, 40, (num_rows, num_columns))
+
     for i in range(10000):
         number = random.randint(1,100)
         list.append(number)
-    a = np.array(list).reshape(10,1000)
-    print(a.shape)
-    string = np.array2string(a, separator=',', max_line_width = 45, threshold = 10000)
-    string.replace('[', '')
-    string.replace(']','')
+    a = np.array(list).reshape(1000,10)
+    print(a.shape,a)
+    string = np.array2string(a, separator=',')
     string = ColumnHeaders + string
 
     #Write the string from print to .csv
     f = open(str(csvName), mode='w', encoding='ASCII')
     f.write(string)
+
+
 main()

@@ -12,9 +12,11 @@ import pandas as pd
 
 def main():
     #Read in File to DataFrame
-    fileName = 'numPyArray.csv'
+    fileName = 'fileload.csv'
     df = pd.read_csv(fileName)
-    print(df.head())
+    print(df)
+
+
 
 
 main()
