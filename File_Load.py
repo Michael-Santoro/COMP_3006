@@ -27,7 +27,6 @@ def main():
     #Grab Columns from Data Frame
     for col in df.columns:
         columns.append(col)
-    print(columns)
 
     string = f'Stats for CSV {fileName}\n'
     string = string + f'Stats: '
@@ -60,7 +59,7 @@ def main():
     string = string[:-2]
     string = string + f'\n'
     string = string + f'Sample Data: \n'
-    string = string + f'{df.head()}'
+    string = string + f'{df.head(3)}'
 
 
     #Write the string from print to .txt
