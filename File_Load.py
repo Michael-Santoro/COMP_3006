@@ -14,7 +14,8 @@ def main():
     #Read in File to DataFrame
     fileName = 'numPyArray.csv'
     df = pd.read_csv(fileName)
-    print(df)
+
+    #Calculate Values
     mean = df.mean()
     std = df.std()
     mode = df.mode()
@@ -23,17 +24,48 @@ def main():
     txtName = 'statsText.txt'
     string = ''
 
+    #Grab Columns from Data Frame
     for col in df.columns:
         columns.append(col)
     print(columns)
 
-    # #Write the string from print to .txt
-    # f = open(str(csvNa), mode='w', encoding='ASCII')
-    # f.write(string)
+    string = f'Stats for CSV {fileName}\n'
+    string = string + f'Stats: '
+    for i in range(len(columns)):
+        string = string + f'{columns[i]}, '
+    string = string[:-2]
+    string = string + f'\n'
+
+    string = string + f'Mean: '
+    for i in range(len(columns)):
+        string = string + f'{round(mean[i],1)}, '
+    string = string[:-2]
+    string = string + f'\n'
+
+    string = string + f'Standard Deviation: '
+    for i in range(len(columns)):
+        string = string + f'{round(std[i],1)}, '
+    string = string[:-2]
+    string = string + f'\n'
+
+    string = string + f'Mode: '
+    for i in range(len(columns)):
+        string = string + f'{mode[columns[i]][0]}, '
+    string = string[:-2]
+    string = string + f'\n'
+
+    string = string + f'Median: '
+    for i in range(len(columns)):
+        string = string + f'{median[i]}, '
+    string = string[:-2]
+    string = string + f'\n'
+    string = string + f'Sample Data: \n'
+    string = string + f'{df.head()}'
 
 
-    #print(mean[1],mean)
-    #print(mode, type(mode), mode['Column 1'][0])
+    #Write the string from print to .txt
+    f = open(str(txtName), mode='w', encoding='ASCII')
+    f.write(string)
 
 
 
