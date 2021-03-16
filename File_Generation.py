@@ -18,19 +18,28 @@ def main():
     ColumnHeaders = ColumnHeaders[:-1]
     ColumnHeaders += '\n'
     # Find Random numbers and Append to List
-    #matrix = np.random.randint(1, 40, (num_rows, num_columns))
+
 
     for i in range(10000):
         number = random.randint(1,100)
         list.append(number)
     a = np.array(list).reshape(1000,10)
     print(a.shape,a)
-    string = np.array2string(a, separator=',')
+    string = np.array2string(a, separator=',',threshold = 10000)
+    string = string.replace('[', '')
+    string = string.replace(']', '')
+    splitString = string.split('\n')
+    print(splitString)
+    string=''
+    for i in splitString:
+        string += i[:-1]+'\n'
     string = ColumnHeaders + string
 
     #Write the string from print to .csv
     f = open(str(csvName), mode='w', encoding='ASCII')
     f.write(string)
+
+    print(np.get_printoptions()['threshold'])
 
 
 main()

@@ -12,9 +12,28 @@ import pandas as pd
 
 def main():
     #Read in File to DataFrame
-    fileName = 'fileload.csv'
+    fileName = 'numPyArray.csv'
     df = pd.read_csv(fileName)
     print(df)
+    mean = df.mean()
+    std = df.std()
+    mode = df.mode()
+    median = df.median()
+    columns = []
+    txtName = 'statsText.txt'
+    string = ''
+
+    for col in df.columns:
+        columns.append(col)
+    print(columns)
+
+    # #Write the string from print to .txt
+    # f = open(str(csvNa), mode='w', encoding='ASCII')
+    # f.write(string)
+
+
+    #print(mean[1],mean)
+    #print(mode, type(mode), mode['Column 1'][0])
 
 
 
